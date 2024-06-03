@@ -18,7 +18,8 @@ namespace CalculatorUnitTests.IntegrationTests
             calculator = new Calculator(operations);
         }
 
-        [Theory, Trait("Category", "Integration")]
+        [Theory]
+        [Trait("Category", "Integration")]
         [Trait("Category", "E2E")]
         [InlineData(5, 10, 14)]
         public void DoCalculations_ShouldReturnTrueOnSuccess_Dup(int a, int b, int expected)

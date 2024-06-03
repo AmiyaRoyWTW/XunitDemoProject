@@ -27,7 +27,8 @@ namespace CalculatorUnitTests.IntegrationTests
             Custom.Assert.IsTrue(calculator.outcome, "Value is not true");
         }
 
-        [Theory, Trait("Category", "Integration")]
+        [Theory]
+        [Trait("Category", "Integration")]
         [Trait("Category", "E2E")]
         [InlineData(4, 10, 14)]
         public void DoCalculations_IMock_ShouldReturnTrueOnSuccess(int a, int b, int expected)
