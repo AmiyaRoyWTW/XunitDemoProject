@@ -10,6 +10,7 @@ namespace CalculatorUnitTests.TestsUtils
         public Task DisposeAsync()
         {                       
             ReportUtil.FlushReport();
+            JsonReporter.GenerateJsonReport();
             return Task.CompletedTask;
         }
 

@@ -10,22 +10,23 @@ namespace CalculatorUnitTests.ReportUtils
     public class ReportUtil
     {
         public static ExtentReports extentReports;
-        private static string reportPath;
+        public static string reportPath;
+        public static string testRunId;
 
         public static void Initilize()
         {
             string? executionAssemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string? companyLogo = $"{executionAssemblyPath}\\ReportUtils\\logo1.png";            
-            string testRunId = Guid.NewGuid().ToString();
+            testRunId = Guid.NewGuid().ToString();
             string baseDirectory = Path.Combine(executionAssemblyPath, @"..\..\..\");
             if (Environment.GetEnvironmentVariable("ExtenReportPath")==null)
             {
-                reportPath = Path.Combine(baseDirectory, @"Reports");
+                reportPath = Path.Combine(baseDirectory, @$"Reports\{testRunId}");
             }
-            else reportPath = $"{Environment.GetEnvironmentVariable("ExtenReportPath")}";
-            var spark = new ExtentSparkReporter($"{reportPath}\\{testRunId}\\RunReport.html");
+            else reportPath = $"{Environment.GetEnvironmentVariable("ExtenReportPath")}\\{testRunId}";
+            var spark = new ExtentSparkReporter($"{reportPath}\\RunReport.html");
             spark.Config.DocumentTitle = "Process Orchestration";
-            spark.Config.Theme = Theme.Dark;
+            spark.Config.Theme = Theme.Standard;
             spark.Config.ReportName = "Execution Report";
             spark.Config.TimelineEnabled = true;
             spark.Config.OfflineMode = false;
