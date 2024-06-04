@@ -11,7 +11,6 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
         public static ExtentTest CurrentTest { get; set; }
         public Dictionary<string, string> currentTestCaseDetails;
         public List<string> currentTestAttributes;
-        public static Dictionary<string, TestResult> testResults = new Dictionary<string, TestResult>();
 
         public BaseTest(ITestOutputHelper output)
         {
@@ -27,20 +26,7 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
         }
         public void Dispose()
         {
-            //_output.GetTestExecutionDetails();
             CurrentTest.Log(Status.Info, $"End of text execution - {currentTestCaseDetails["TestMethodName"]}");
         }
-
-        protected void CollectTestResults(string testName, TestResult result)
-        {
-            testResults[testName] = result;
-        }
-    }
-
-    public enum TestResult
-    {
-        Passed,
-        Failed,
-        Unknown
     }
 }

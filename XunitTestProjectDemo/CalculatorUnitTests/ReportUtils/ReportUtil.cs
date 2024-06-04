@@ -19,11 +19,11 @@ namespace CalculatorUnitTests.ReportUtils
             string? companyLogo = $"{executionAssemblyPath}\\ReportUtils\\logo1.png";            
             testRunId = Guid.NewGuid().ToString();
             string baseDirectory = Path.Combine(executionAssemblyPath, @"..\..\..\");
-            if (Environment.GetEnvironmentVariable("ExtenReportPath")==null)
+            if (Environment.GetEnvironmentVariable("ExtentReportPath")==null)
             {
                 reportPath = Path.Combine(baseDirectory, @$"Reports\{testRunId}");
             }
-            else reportPath = $"{Environment.GetEnvironmentVariable("ExtenReportPath")}\\{testRunId}";
+            else reportPath = $"{Environment.GetEnvironmentVariable("ExtentReportPath")}\\{testRunId}";
             var spark = new ExtentSparkReporter($"{reportPath}\\RunReport.html");
             spark.Config.DocumentTitle = "Process Orchestration";
             spark.Config.Theme = Theme.Standard;

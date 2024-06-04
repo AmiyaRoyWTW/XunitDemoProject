@@ -13,8 +13,6 @@ namespace CalculatorUnitTests.TestsUtils
 
         public Task InitializeAsync()
         {
-            //var runner = AssemblyRunner.WithoutAppDomain(Assembly.GetExecutingAssembly().Location);
-            //runner.Start();
             ReportUtil.Initilize();
             return Task.CompletedTask;
         }
