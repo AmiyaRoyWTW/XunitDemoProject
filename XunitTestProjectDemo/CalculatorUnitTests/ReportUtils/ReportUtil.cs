@@ -10,8 +10,8 @@ namespace CalculatorUnitTests.ReportUtils
     public class ReportUtil
     {
         public static ExtentReports extentReports;
-        public static string reportPath;
-        public static string testRunId;
+        public static string? reportPath;
+        public static string? testRunId;
 
         public static void Initilize()
         {

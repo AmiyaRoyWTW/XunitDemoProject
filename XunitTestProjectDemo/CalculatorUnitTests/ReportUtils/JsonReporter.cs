@@ -6,11 +6,11 @@ namespace CalculatorUnitTests.ReportUtils
 {
     public class JsonReporter
     {
-        private ExtentReports _reports;
+        private static ExtentReports? _reports;
 
         public static void GenerateJsonReport()
         {
-            var _reports = ReportUtil.extentReports;
+            _reports = ReportUtil.extentReports;
             TestRunSummary testRunSummary = new TestRunSummary();
             testRunSummary.TestCases = new List<TestCase>();
             testRunSummary.FailedTestCases = new List<TestCase>();            
