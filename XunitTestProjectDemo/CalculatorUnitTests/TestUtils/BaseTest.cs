@@ -1,7 +1,6 @@
 ﻿using AventStack.ExtentReports;
 using CalculatorUnitTests.ReportUtils;
 using CalculatorUnitTests.TestUtils;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Xunit.Abstractions;
 
 namespace CalculatorUnitTests.Xunit.TestsUtil
@@ -19,11 +18,11 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
             _output = output;
             currentTestCaseDetails = _output.GetTestCaseDetails();
             currentTestAttributes = _output.GetTestCaseAttributes();            
-            CurrentTest = ReportUtil.extentReports.CreateTest($"{currentTestCaseDetails["TestClassName"]}.{currentTestCaseDetails["TestMethodName"]}");
+            CurrentTest = ReportUtil.extentReports.CreateTest($"{currentTestCaseDetails["TestClassName"]}.{currentTestCaseDetails["TestMethodName"]}", currentTestCaseDetails["TestCaseDesc"]);
             foreach (var attribute in currentTestAttributes)
             {
                 CurrentTest.AssignCategory(attribute);
-            }
+            }            
             CurrentTest.Log(Status.Info, $"Start of text case execution - {currentTestCaseDetails["TestMethodName"]}");
         }
         public void Dispose()

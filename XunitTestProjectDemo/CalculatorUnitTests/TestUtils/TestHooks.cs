@@ -1,7 +1,4 @@
 ﻿using CalculatorUnitTests.ReportUtils;
-using System.Reflection;
-using Xunit.Runners;
-using Xunit.Sdk;
 
 namespace CalculatorUnitTests.TestsUtils
 {

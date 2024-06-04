@@ -1,11 +1,10 @@
 ﻿using CalculatorUnitTests.Xunit.TestsUtil;
 using AventStack.ExtentReports;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace CalculatorUnitTests.AssertUtil
 {
-    public static class Assert
+    public static class Assertion
     {
         public const string NOT_EQUAL = "Expected value <{0}> not equal to Actual Value <{1}>";
         private const string LIST_NOT_EQUAL = "Expected List <{0}> not equal to Actual List <{1}>";

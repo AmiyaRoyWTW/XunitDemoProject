@@ -1,11 +1,6 @@
 ﻿using AventStack.ExtentReports;
 using CalculatorUnitTests.TestUtils.DTOs;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalculatorUnitTests.ReportUtils
 {
