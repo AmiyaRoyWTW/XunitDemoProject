@@ -1,6 +1,7 @@
 ﻿using CalculatorUnitTests.Xunit.TestsUtil;
 using AventStack.ExtentReports;
 using System.Text.Json;
+using AventStack.ExtentReports.Model;
 
 namespace CalculatorUnitTests.AssertUtil
 {
@@ -339,12 +340,6 @@ namespace CalculatorUnitTests.AssertUtil
             ManageAssert(predicate, falseMessage);
         }
 
-        public static void Fail(string errorMessage)
-        {
-            BaseTest.CurrentTest.Log(Status.Fail, errorMessage);
-            throw new Exception(errorMessage);
-        }
-
         /// <summary>
         /// Asserts to make sure the expected element exists inside the source collection
         /// </summary>
@@ -518,17 +513,36 @@ namespace CalculatorUnitTests.AssertUtil
         private static void ManageAssert(bool assertState, string message, string additionalErrorMessage = "")
         {
             if (!assertState)
-            {
-                if (additionalErrorMessage != "")
+            {                
+                var exceptionMessage = additionalErrorMessage == "" ? message : $"{additionalErrorMessage}: {message}";
+                BaseTest.CurrentTest.Log(Status.Fail, exceptionMessage);
+                Exception exception = new Exception(exceptionMessage);
+                try
                 {
-                    BaseTest.CurrentTest.Log(Status.Fail, additionalErrorMessage + ": " + message);
-                    throw new Exception(additionalErrorMessage + ": " + message);
+                    throw exception;
                 }
-                else
+                catch (Exception ex)
                 {
-                    BaseTest.CurrentTest.Log(Status.Fail, message);
-                    throw new Exception(message);
-                }  
+                    List<ExceptionInfo> exceptionInfos = [new ExceptionInfo(ex)];
+                    BaseTest.CurrentTest.Test.ExceptionInfo = exceptionInfos;
+                    throw;
+                }                               
+            }
+        }
+
+        public static void Fail(string errorMessage)
+        {
+            BaseTest.CurrentTest.Log(Status.Fail, errorMessage);
+            Exception exception = new Exception(errorMessage);
+            try
+            {
+                throw exception;
+            }
+            catch (Exception ex)
+            {
+                List<ExceptionInfo> exceptionInfos = [new ExceptionInfo(ex)];
+                BaseTest.CurrentTest.Test.ExceptionInfo = exceptionInfos;
+                throw;
             }
         }
 

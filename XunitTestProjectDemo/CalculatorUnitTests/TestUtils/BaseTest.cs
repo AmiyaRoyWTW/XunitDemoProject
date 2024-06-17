@@ -26,6 +26,10 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
         }
         public void Dispose()
         {
+            if (CurrentTest.Test.ExceptionInfo.Count>0)
+            {
+                CurrentTest.Log(Status.Error, CurrentTest.Test.ExceptionInfo.ToList().FirstOrDefault().Exception.StackTrace.ToString());
+            }
             CurrentTest.Log(Status.Info, $"End of text execution - {currentTestCaseDetails["TestMethodName"]}");
         }
     }

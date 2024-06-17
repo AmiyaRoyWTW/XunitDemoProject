@@ -14,7 +14,7 @@ namespace CalculatorUnitTests.ReportUtils
             TestRunSummary testRunSummary = new TestRunSummary();
             testRunSummary.TestCases = new List<TestCase>();
             testRunSummary.FailedTestCases = new List<TestCase>();            
-            testRunSummary.TestRunId = ReportUtil.testRunId;
+            testRunSummary.TestRunId = (ReportUtil.testRunId != null) ? ReportUtil.testRunId : "";
             testRunSummary.StartTime = _reports.Report.StartTime;
             testRunSummary.EndTime = _reports.Report.EndTime;
             var executedTests = _reports.Report.Tests.ToList();
@@ -33,12 +33,11 @@ namespace CalculatorUnitTests.ReportUtils
                     Status = executedTest.Status.ToString(),
                     StartTime = executedTest.StartTime,
                     EndTime = executedTest.EndTime,
-                    TestCaseError = executedTest.Status.ToString().Equals("Fail") 
-                                        ? executedTest.Logs.Where(x => x.Status.ToString().Equals("Fail")).First()
-                                            .Details.ToString() : ""
+                    ErrorMsg = (executedTest.ExceptionInfo.Count>0) ? executedTest.ExceptionInfo.FirstOrDefault().Exception.Message : null,
+                    StackTrace = (executedTest.ExceptionInfo.Count > 0) ? executedTest.ExceptionInfo.FirstOrDefault().Exception.StackTrace.ToString().Trim() : null
                 };
                 testRunSummary.TestCases.Add(testCase);
-                if (testCase.TestCaseError != "")
+                if (testCase.ErrorMsg != "")
                 {
                     testRunSummary.FailedTestCases.Add(testCase);
                 }
