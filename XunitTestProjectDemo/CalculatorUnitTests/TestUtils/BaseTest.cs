@@ -28,7 +28,7 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
         {
             if (CurrentTest.Test.ExceptionInfo.Count>0)
             {
-                CurrentTest.Log(Status.Error, CurrentTest.Test.ExceptionInfo.ToList().FirstOrDefault().Exception.StackTrace.ToString());
+                CurrentTest.Log(Status.Error, CurrentTest.Test.ExceptionInfo.ToList().FirstOrDefault().Exception.StackTrace.ToString().Trim().Replace(Environment.NewLine, "<br>"));
             }
             CurrentTest.Log(Status.Info, $"End of text execution - {currentTestCaseDetails["TestMethodName"]}");
         }
