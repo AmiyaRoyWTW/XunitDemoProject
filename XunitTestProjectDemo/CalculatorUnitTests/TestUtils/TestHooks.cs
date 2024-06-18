@@ -6,14 +6,14 @@ namespace CalculatorUnitTests.TestsUtils
     {
         public Task DisposeAsync()
         {                       
-            ReportUtil.FlushReport();
+            HtmlReporter.FlushReport();
             JsonReporter.GenerateJsonReport();
             return Task.CompletedTask;
         }
 
         public Task InitializeAsync()
         {
-            ReportUtil.Initilize();
+            HtmlReporter.Initilize();
             return Task.CompletedTask;
         }
     }

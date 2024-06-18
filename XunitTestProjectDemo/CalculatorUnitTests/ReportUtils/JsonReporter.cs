@@ -10,11 +10,11 @@ namespace CalculatorUnitTests.ReportUtils
 
         public static void GenerateJsonReport()
         {
-            _reports = ReportUtil.extentReports;
+            _reports = HtmlReporter.extentReports;
             TestRunSummary testRunSummary = new TestRunSummary();
             testRunSummary.TestCases = new List<TestCase>();
             testRunSummary.FailedTestCases = new List<TestCase>();            
-            testRunSummary.TestRunId = (ReportUtil.testRunId != null) ? ReportUtil.testRunId : "";
+            testRunSummary.TestRunId = (HtmlReporter.testRunId != null) ? HtmlReporter.testRunId : "";
             testRunSummary.StartTime = _reports.Report.StartTime;
             testRunSummary.EndTime = _reports.Report.EndTime;
             var executedTests = _reports.Report.Tests.ToList();
@@ -37,12 +37,12 @@ namespace CalculatorUnitTests.ReportUtils
                     StackTrace = (executedTest.ExceptionInfo.Count > 0) ? executedTest.ExceptionInfo.FirstOrDefault().Exception.StackTrace.ToString().Trim() : null
                 };
                 testRunSummary.TestCases.Add(testCase);
-                if (testCase.ErrorMsg != "")
+                if (testCase.ErrorMsg != null)
                 {
                     testRunSummary.FailedTestCases.Add(testCase);
                 }
             }
-            File.WriteAllText($"{ReportUtil.reportPath}\\RunReport.json", JsonConvert.SerializeObject(testRunSummary));
+            File.WriteAllText($"{HtmlReporter.reportPath}\\RunReport.json", JsonConvert.SerializeObject(testRunSummary));
         }
     }
 }

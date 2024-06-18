@@ -7,7 +7,7 @@ using System.Reflection;
 namespace CalculatorUnitTests.ReportUtils
 {
     
-    public class ReportUtil
+    public class HtmlReporter
     {
         public static ExtentReports extentReports;
         public static string? reportPath;
@@ -19,11 +19,11 @@ namespace CalculatorUnitTests.ReportUtils
             string? companyLogo = $"{executionAssemblyPath}\\ReportUtils\\logo1.png";            
             testRunId = Guid.NewGuid().ToString();
             string baseDirectory = Path.Combine(executionAssemblyPath, @"..\..\..\");
-            if (Environment.GetEnvironmentVariable("ExtentReportPath")==null)
+            if (Environment.GetEnvironmentVariable("ExecutionReportPath")==null)
             {
                 reportPath = Path.Combine(baseDirectory, @$"Reports\{testRunId}");
             }
-            else reportPath = $"{Environment.GetEnvironmentVariable("ExtentReportPath")}\\{testRunId}";
+            else reportPath = $"{Environment.GetEnvironmentVariable("ExecutionReportPath")}\\{testRunId}";
             var spark = new ExtentSparkReporter($"{reportPath}\\RunReport.html");
             spark.Config.DocumentTitle = "Process Orchestration";
             spark.Config.Theme = Theme.Standard;
@@ -39,6 +39,5 @@ namespace CalculatorUnitTests.ReportUtils
         {
             extentReports.Flush();
         }
-
     }
 }

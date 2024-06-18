@@ -17,12 +17,12 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
             _output = output;
             currentTestCaseDetails = _output.GetTestCaseDetails();
             currentTestAttributes = _output.GetTestCaseAttributes();            
-            CurrentTest = ReportUtil.extentReports.CreateTest($"{currentTestCaseDetails["TestClassName"]}.{currentTestCaseDetails["TestMethodName"]}", currentTestCaseDetails["TestCaseDesc"]);
+            CurrentTest = HtmlReporter.extentReports.CreateTest($"{currentTestCaseDetails["TestClassName"]}.{currentTestCaseDetails["TestMethodName"]}", currentTestCaseDetails["TestCaseDesc"]);
             foreach (var attribute in currentTestAttributes)
             {
                 CurrentTest.AssignCategory(attribute);
             }            
-            CurrentTest.Log(Status.Info, $"Start of text case execution - {currentTestCaseDetails["TestMethodName"]}");
+            CurrentTest.Log(Status.Info, $"Start of test case execution - {currentTestCaseDetails["TestMethodName"]}");
         }
         public void Dispose()
         {
@@ -30,7 +30,7 @@ namespace CalculatorUnitTests.Xunit.TestsUtil
             {
                 CurrentTest.Log(Status.Error, CurrentTest.Test.ExceptionInfo.ToList().FirstOrDefault().Exception.StackTrace.ToString().Trim().Replace(Environment.NewLine, "<br>"));
             }
-            CurrentTest.Log(Status.Info, $"End of text execution - {currentTestCaseDetails["TestMethodName"]}");
+            CurrentTest.Log(Status.Info, $"End of test execution - {currentTestCaseDetails["TestMethodName"]}");
         }
     }
 }
