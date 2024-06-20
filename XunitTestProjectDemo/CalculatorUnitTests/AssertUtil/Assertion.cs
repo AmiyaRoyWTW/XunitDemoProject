@@ -546,6 +546,22 @@ namespace CalculatorUnitTests.AssertUtil
             }
         }
 
+        public static async Task<Exception?> ThrowsAsync<T>(Func<Task> testCode) where T : Exception
+        {
+            try
+            {
+                await Assert.ThrowsAsync<T>(async () => await testCode());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                BaseTest.CurrentTest.Log(Status.Fail, ex.Message.Trim().Replace(Environment.NewLine, "<br>"));
+                List<ExceptionInfo> exceptionInfos = [new ExceptionInfo(ex)];
+                BaseTest.CurrentTest.Test.ExceptionInfo = exceptionInfos;
+                throw;
+            }            
+        }
+
         public static void DictionaryContainsKey(Dictionary<string, string> dictionary,
                              string expectedKey, string additionalErrorMessage)
         {
